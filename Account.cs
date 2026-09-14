@@ -4,7 +4,7 @@ namespace WestcoastBank;
 
 public class Account(string accountNumber, string firstName, string lastName)
 {
-    public virtual int Balance { get; private set; }
+    public virtual int Balance { get; set; }
     public string AccountNumber { get; } = accountNumber;
     public Customer Customer { get; set; } = new Customer(){FirstName = firstName, LastName = lastName};
     public List<Transaction> Transactions { get; } = [];

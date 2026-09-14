@@ -7,21 +7,17 @@ public class SavingsAccount(string accountNo, string fName, string lName) : Acco
     // {
 
     // }
+    const double INTEREST_RATE = 0.05;
+    public override int Balance => 
+        Convert.ToInt32(base.Balance * (1 + INTEREST_RATE));
 
-    public override int Balance => base.Balance + 10;
-    // public override int Balance
-    // {
-    //     get
-    //     {
-    //         return base.Balance + 100;    
-    //     }
-    // }
     public double InterestRate { get; set; }
 
-    // public override void Deposit(int amount)
-    // {
-    //     AddTransaction(amount, TransactionTypeEnum.Insättning);
-    // }
+    public override void Deposit(int amount)
+    {
+        base.Balance += amount;
+        AddTransaction(amount, TransactionTypeEnum.Insättning);
+    }
     public void CalculateInterest()
     {
         
