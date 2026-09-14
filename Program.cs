@@ -5,14 +5,15 @@ namespace ATM;
 class Program
 {
     // static Account account = new Account("1234-5678");
-    static Account account = new("1234-5678") { };
+    static SavingsAccount account = new("1234-5678", "Eva", "Nilsson") { };
     // static Account account = new("1234-5678") { };
 
     // static Account account = new() { accountNumber = "1234-5678" };
 
+    
+
     static void Main()
     {
-        account.FirstName = "Michael";
         // Här är vår enkla meny...
         Console.WriteLine("--------------------------------------------------");
         Console.WriteLine("För att sätta in tryck på tangenten 'd'");
@@ -21,6 +22,8 @@ class Program
         Console.WriteLine("För att se transaktionerna tryck på tangenten 't'");
         Console.WriteLine("För att avsluta tryck på tangenten 'x'");
         Console.WriteLine("--------------------------------------------------");
+
+        
 
         App();
     }
@@ -107,6 +110,7 @@ class Program
     }
     static void DisplayBalance()
     {
+        var b = account.Balance;
         Console.WriteLine($"Ditt nuvarande saldo: {account.Balance}");
     }
 
