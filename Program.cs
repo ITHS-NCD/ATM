@@ -24,7 +24,8 @@ class Program
         Console.WriteLine("För att ta ut, tryck på tangenten 'w'");
         Console.WriteLine("För att se saldo, tryck på tangenten 'b'");
         Console.WriteLine("För att se transaktionerna, tryck på tangenten 't'");
-        Console.WriteLine("För att se kontouppgifter, tryck på tangenten 'k'");
+        Console.WriteLine("För att se vilka konton de finns, tryck på tangenten 'k'");
+        Console.WriteLine("För att se kontouppgifter, tryck på tangenten 'i'");
         Console.WriteLine("För att avsluta, tryck på tangenten 'x'");
         Console.WriteLine("--------------------------------------------------");
 
@@ -87,6 +88,9 @@ class Program
                         }
                         WithDraw(value);
                         break;
+                    case "i":
+                        GetInformation();
+                        break;
                     case "x":
                         Environment.Exit(0);
                         break;
@@ -117,7 +121,7 @@ class Program
 
     static void WithDraw(int amount)
     {
-        account_1!.WithDraw(amount);
+        account_1.WithDraw(amount);
     }
     static void DisplayBalance()
     {
@@ -145,5 +149,10 @@ class Program
             Console.WriteLine(account.Balance);
         }
         Console.ResetColor();
+    }
+
+    static void GetInformation()
+    {
+        account_1.GetInformation();
     }
 }

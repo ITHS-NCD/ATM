@@ -18,8 +18,4 @@ public class SavingsAccount(string accountNo, string fName, string lName) : Acco
         base.Balance += amount;
         AddTransaction(amount, TransactionTypeEnum.Insättning);
     }
-    public void CalculateInterest()
-    {
-        
-    }
 }

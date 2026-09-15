@@ -35,4 +35,12 @@ public class Account(string accountNumber, string firstName, string lastName)
         };
         Transactions.Add(tran);
     }
+    public void GetInformation()
+    {
+        Console.WriteLine($"Kontonummer: {AccountNumber} - Förnamn: {firstName} - Efternamn: {lastName} - Saldo: {Balance}");
+        foreach (var tran in Transactions)
+        {
+            Console.WriteLine(tran);
+        } 
+    }
 }
