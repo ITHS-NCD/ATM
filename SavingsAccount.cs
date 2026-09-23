@@ -1,6 +1,7 @@
 ﻿namespace WestcoastBank;
 
-public class SavingsAccount(string accountNo, string fName, string lName) : Account(accountNo, fName, lName)
+public class SavingsAccount(string accountNo) 
+: Account(accountNo)
 {
     // // Det gamla sättet att överföra information till basklassen (Account)
     // public SavingsAccount(string accountNo) : base(accountNo)
@@ -13,9 +14,4 @@ public class SavingsAccount(string accountNo, string fName, string lName) : Acco
 
     public double InterestRate { get; set; }
 
-    public override void Deposit(int amount)
-    {
-        base.Balance += amount;
-        AddTransaction(amount, TransactionTypeEnum.Insättning);
-    }
 }

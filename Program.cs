@@ -1,22 +1,18 @@
-﻿using WestcoastBank;
-
-namespace ATM;
+﻿namespace WestcoastBank;
 
 class Program
 {
     // static Account account = new Account("1234-5678");
-    static Account account_1 = new("1234-5678", "Eva", "Nilsson");
-    static SavingsAccount account_2 = new("1234-5678", "Eva", "Nilsson");
+    static Account account_1 = new("1234-5678");
+    static SavingsAccount account_2 = new("1234-5678");
     
     static List<Account> accounts = [];
 
     
     static void Main()
     {
-
         accounts.Add(account_1);
         accounts.Add(account_2);
-
 
         // Här är vår enkla meny...
         Console.WriteLine("--------------------------------------------------");
@@ -25,7 +21,6 @@ class Program
         Console.WriteLine("För att se saldo, tryck på tangenten 'b'");
         Console.WriteLine("För att se transaktionerna, tryck på tangenten 't'");
         Console.WriteLine("För att se vilka konton de finns, tryck på tangenten 'k'");
-        Console.WriteLine("För att se kontouppgifter, tryck på tangenten 'i'");
         Console.WriteLine("För att avsluta, tryck på tangenten 'x'");
         Console.WriteLine("--------------------------------------------------");
 
@@ -88,9 +83,7 @@ class Program
                         }
                         WithDraw(value);
                         break;
-                    case "i":
-                        GetInformation();
-                        break;
+                
                     case "x":
                         Environment.Exit(0);
                         break;
@@ -149,10 +142,5 @@ class Program
             Console.WriteLine(account.Balance);
         }
         Console.ResetColor();
-    }
-
-    static void GetInformation()
-    {
-        account_1.GetInformation();
     }
 }

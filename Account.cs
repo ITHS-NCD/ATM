@@ -1,22 +1,22 @@
-namespace WestcoastBank;
+﻿namespace WestcoastBank;
 
-
-
-public class Account(string accountNumber, string firstName, string lastName)
+public class Account(string accNo)
+: IBaseAccount, IAccountProps
 {
-    public virtual int Balance { get; set; }
-    public string AccountNumber { get; } = accountNumber;
-    public Customer Customer { get; set; } = new Customer(){FirstName = firstName, LastName = lastName};
-    public List<Transaction> Transactions { get; } = [];
+    public virtual int Balance { get; private set; }
 
-    public virtual void Deposit(int amount)
+    public string AccountNumber => accNo;
+
+    public List<Transaction> Transactions => [];
+
+    public void Deposit(int amount)
     {
         Balance += amount;
         AddTransaction(amount, TransactionTypeEnum.Insättning);
     }
 
     public void WithDraw(int amount)
-    {
+    {  
         if (Balance < amount)
         {
             throw new Exception("Du har inte tillräckligt på kontot");
@@ -26,7 +26,7 @@ public class Account(string accountNumber, string firstName, string lastName)
         AddTransaction(amount, TransactionTypeEnum.Uttag);
     }
 
-    protected void AddTransaction(int amount, TransactionTypeEnum type)
+    public void AddTransaction(int amount, TransactionTypeEnum type)
     {
         Transaction tran = new()
         {
@@ -34,13 +34,5 @@ public class Account(string accountNumber, string firstName, string lastName)
             TransactionType = type
         };
         Transactions.Add(tran);
-    }
-    public void GetInformation()
-    {
-        Console.WriteLine($"Kontonummer: {AccountNumber} - Förnamn: {firstName} - Efternamn: {lastName} - Saldo: {Balance}");
-        foreach (var tran in Transactions)
-        {
-            Console.WriteLine(tran);
-        } 
     }
 }
