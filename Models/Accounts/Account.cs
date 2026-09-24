@@ -1,7 +1,8 @@
-﻿using System.Text.Encodings.Web;
-using System.Text.Json;
+﻿using WestcoastBank.Enums;
+using WestcoastBank.Interfaces;
+using WestcoastBank.Models.Persistance;
 
-namespace WestcoastBank;
+namespace WestcoastBank.Models.Accounts;
 
 public class Account : IBaseAccount
 {
@@ -13,28 +14,14 @@ public class Account : IBaseAccount
     public string AccountNumber { get; private set; }
     public List<Transaction> Transactions { get => _transactionList; }
 
+    List<Transaction> IBaseAccount.Transactions => throw new NotImplementedException();
+
     // Old fashion constructor
     public Account(string accNo)
     {
         AccountNumber = accNo;
-        string storedTrx = File.ReadAllText(_path);
-
-        if (!string.IsNullOrEmpty(storedTrx) && !string.IsNullOrWhiteSpace(storedTrx))
-        {
-            _transactionList = JsonSerializer.Deserialize<List<Transaction>>(storedTrx, _options)!;
-        }
-        else
-        {
-            Console.WriteLine("Tomt");
-        }
+        _transactionList = Storage.ReadFromJson(_path);
     }
-
-    private readonly JsonSerializerOptions _options = new()
-    {
-        PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-        WriteIndented = true,
-        Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping
-    };
 
     public void Deposit(int amount)
     {
@@ -62,8 +49,6 @@ public class Account : IBaseAccount
         };
         _transactionList.Add(tran);
 
-        // Write transaction to file...
-        string json = JsonSerializer.Serialize(_transactionList, _options);
-        File.WriteAllText(_path, json);
+        Storage.WriteToJson(_transactionList, _path);
     }
 }

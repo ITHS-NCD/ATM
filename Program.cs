@@ -1,23 +1,26 @@
-﻿using System.Text.Json;
-using System.Text.Json.Nodes;
+﻿using WestcoastBank.Models;
+using WestcoastBank.Models.Accounts;
+using WestcoastBank.Models.Persistance;
 
 namespace WestcoastBank;
 
 class Program
 {
-    // static Account account = new Account("1234-5678");
-    static Account account = new("1234-5678");
-   
-    
+    static readonly Account account = new("1111-5678");
+    static readonly List<Account> accounts = [];
+
     static void Main()
     {
+        accounts.Add(account);
+
         // Här är vår enkla meny...
         Console.WriteLine("--------------------------------------------------");
-        Console.WriteLine("För att sätta in, tryck på tangenten 'd'");
-        Console.WriteLine("För att ta ut, tryck på tangenten 'w'");
-        Console.WriteLine("För att se saldo, tryck på tangenten 'b'");
-        Console.WriteLine("För att se transaktionerna, tryck på tangenten 't'");
-        Console.WriteLine("För att avsluta, tryck på tangenten 'x'");
+        Console.WriteLine("För att sätta in tryck på tangenten 'd'");
+        Console.WriteLine("För att ta ut tryck på tangenten 'w'");
+        Console.WriteLine("För att se saldo tryck på tangenten 'b'");
+        Console.WriteLine("För att se transaktionerna tryck på tangenten 't'");
+        Console.WriteLine("För att se kontouppgifter tryck på tangenten 'k'");
+        Console.WriteLine("För att avsluta tryck på tangenten 'x'");
         Console.WriteLine("--------------------------------------------------");
 
         App();
@@ -43,6 +46,9 @@ class Program
                         break;
                     case "t":
                         DisplayTransactions();
+                        break;
+                    case "k":
+                        DisplayAccounts();
                         break;
                     case "d":
                         Console.WriteLine("Hur mycket vill du sätta in?");
@@ -74,7 +80,6 @@ class Program
                         }
                         WithDraw(value);
                         break;
-                
                     case "x":
                         Environment.Exit(0);
                         break;
@@ -97,7 +102,6 @@ class Program
 
     static void Deposit(int amount)
     {
-        // Account referensen
         account.Deposit(amount);
     }
 
@@ -107,15 +111,24 @@ class Program
     }
     static void DisplayBalance()
     {
-        var b = account!.Balance;
         Console.WriteLine($"Ditt nuvarande saldo: {account.Balance}");
     }
 
     static void DisplayTransactions()
-    {      
-        foreach (var tran in account.Transactions)
+    {
+        foreach (Transaction trx in account.Transactions)
         {
-            Console.WriteLine(tran.ToString());
+            Console.WriteLine(trx);
         }
+    }
+
+    static void DisplayAccounts()
+    {
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        foreach (var account in accounts)
+        {
+            Console.WriteLine(account.Balance);
+        }
+        Console.ResetColor();
     }
 }

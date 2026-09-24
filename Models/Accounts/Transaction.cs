@@ -1,13 +1,12 @@
-using System.Text.Encodings.Web;
-using System.Text.Json;
-namespace WestcoastBank;
+using WestcoastBank.Enums;
+
+namespace WestcoastBank.Models.Accounts;
 
 public class Transaction
 {
     public DateTime TransactionDate { get; } = DateTime.Now;
     public TransactionTypeEnum TransactionType { get; set; }
-    public int TransactionAmount { get; set; }        
-    
+    public int TransactionAmount { get; set; }
     public override string ToString()
     {
         return $"Transaktionsdatum: {TransactionDate} Transaktionstyp: {TransactionType} Belopp: {TransactionAmount}";
